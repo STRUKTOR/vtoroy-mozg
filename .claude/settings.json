@@ -1,0 +1,24 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git pull --ff-only --quiet || echo \"Базу не удалось подтянуть с GitHub: скажи об этом пользователю одной строкой.\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git add -A; git commit -q -m \"Автосохранение базы\" >/dev/null 2>&1; git status -sb | head -1 | grep -q ahead && git push -q; exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}
